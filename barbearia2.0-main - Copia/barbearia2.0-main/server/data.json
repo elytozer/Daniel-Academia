@@ -47,15 +47,25 @@
   ],
   "appointments": [
     {
-      "id": "a1769016104406",
-      "serviceId": "avaliacao",
+      "id": "a1769016839779",
+      "serviceId": "musculacao",
       "comboId": null,
-      "date": "2026-01-21T15:00",
+      "date": "2026-01-21T14:36",
+      "note": "",
+      "status": "pago"
+    },
+    {
+      "id": "a1769016805589",
+      "serviceId": "personal",
+      "comboId": null,
+      "date": "2026-01-21T14:33",
       "note": "",
       "status": "pago"
     }
   ],
-  "favTimes": [],
+  "favTimes": [
+    "2026-01-21T14:33"
+  ],
   "profile": {
     "name": "mateus",
     "phone": ""
@@ -95,6 +105,13 @@
       "password": "1234",
       "name": "mateus",
       "createdAt": "2026-01-21T17:00:34.658Z"
+    },
+    {
+      "id": "u1769016977826",
+      "email": "Nicolasso@gmail.com",
+      "password": "12345",
+      "name": "Nicolas",
+      "createdAt": "2026-01-21T17:36:17.826Z"
     }
   ]
 }

@@ -32,4 +32,6 @@ function validateUser(email,password){
   return {id:user.id,email:user.email,name:user.name}
 }
 
-module.exports = {read,write,get,set,pushAppointment,updateAppointment,findUser,createUser,validateUser}
+function deleteAppointment(id){const d=read();const idx=d.appointments.findIndex(a=>a.id===id);if(idx===-1) return null;const removed=d.appointments.splice(idx,1)[0];write(d);return removed}
+
+module.exports = {read,write,get,set,pushAppointment,updateAppointment,deleteAppointment,findUser,createUser,validateUser}

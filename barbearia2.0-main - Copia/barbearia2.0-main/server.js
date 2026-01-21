@@ -45,6 +45,9 @@ app.get('/api/appointments', (req,res)=>{res.json(ds.get('appointments')||[])})
 app.post('/api/appointments', (req,res)=>{
   const body = req.body
   if(!body.date) return res.status(400).json({error:'date required'})
+  const appointments = ds.get('appointments')||[]
+  const dateExists = appointments.some(a=>a.date===body.date)
+  if(dateExists) return res.status(409).json({error:'Horário já ocupado'})
   const id = 'a'+Date.now()
   const appt = {id,serviceId:body.serviceId||null,comboId:body.comboId||null,date:body.date,note:body.note||'',status:'confirmado'}
   ds.pushAppointment(appt)
@@ -56,6 +59,13 @@ app.put('/api/appointments/:id', (req,res)=>{
   const updated = ds.updateAppointment(id,req.body)
   if(!updated) return res.status(404).json({error:'not found'})
   return res.json(updated)
+})
+
+app.delete('/api/appointments/:id', (req,res)=>{
+  const id = req.params.id
+  const deleted = ds.deleteAppointment(id)
+  if(!deleted) return res.status(404).json({error:'not found'})
+  return res.json({success:true,deleted})
 })
 
 // API - Perfil

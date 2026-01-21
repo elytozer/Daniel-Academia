@@ -113,9 +113,17 @@ async function saveFavorite(t){
 async function createAppointment({serviceId,date,note,comboId}){
   if(!date) return alert('Escolha data e hora')
   const item = {serviceId,comboId,date,note,status:'confirmado'}
-  const result = await DB.saveAppointment(item)
-  if(result){
-    closeModal();renderAppointments();openPayment(result)
+  try{
+    const result = await API.post('/appointments',item)
+    if(result&&result.id){
+      closeModal();renderAppointments();openPayment(result)
+    }else if(result&&result.error){
+      alert(result.error)
+    }else{
+      alert('Erro ao agendar')
+    }
+  }catch(e){
+    alert('Erro ao agendar: horário pode estar indisponível')
   }
 }
 
@@ -155,9 +163,9 @@ function markPaid(id){API.put(`/appointments/${id}`,{status:'pago'})}
 async function sendReminder(appt){alert(`Lembrete enviado para o agendamento em ${new Date(appt.date).toLocaleString()} (simulado)`)}
 
 async function completeAppointment(id){
-  await DB.updateAppointment(id,{status:'concluido'})
+  await fetch(`/api/appointments/${id}`,{method:'DELETE'})
   renderAppointments()
-  alert('Atendimento marcado como concluído')
+  alert('Agendamento removido com sucesso')
 }
 
 async function openFeedback(appt){
@@ -202,8 +210,8 @@ function initProfile(){el('profileBtn').onclick=async ()=>{
   const wrapper=document.createElement('div')
   wrapper.innerHTML = `<h3>Meu Perfil</h3>`
   const name = document.createElement('input');name.value=prof.name;name.placeholder='Nome'
-  const phone = document.createElement('input');phone.value=prof.phone;phone.placeholder='Telefone'
-  const save = document.createElement('button');save.textContent='Salvar';save.onclick=async ()=>{await DB.saveProfile({name:name.value,phone:phone.value});alert('Perfil salvo');closeModal()}
+  const phone = document.createElement('input');phone.type='tel';phone.value=prof.phone;phone.placeholder='(00)000000-0000';phone.maxLength='14';phone.oninput=()=>{let v=phone.value.replace(/[^0-9]/g,'').slice(0,12);if(v.length>0){if(v.length<=2)v='('+v;else if(v.length<=8)v='('+v.slice(0,2)+')'+v.slice(2);else v='('+v.slice(0,2)+')'+v.slice(2,7)+'-'+v.slice(7)}phone.value=v}
+  const save = document.createElement('button');save.textContent='Salvar';save.onclick=async ()=>{const clean=phone.value.replace(/[^0-9]/g,'');if(clean.length!==12)return alert('Telefone deve ter 12 dígitos');await DB.saveProfile({name:name.value,phone:phone.value});alert('Perfil salvo');closeModal()}
   wrapper.appendChild(name);wrapper.appendChild(phone);wrapper.appendChild(save)
   openModal(wrapper)
 }}

@@ -1,0 +1,43 @@
+:root{--bg:#e5f0ec;--card:#ecf7ed;--accent:#222;--primary:#2b8fbd}
+*{box-sizing:border-box;font-family:Inter, system-ui, Arial, sans-serif}
+body{margin:0;background:var(--bg);color:#111}
+.top{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--card);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.top h1{margin:0;font-size:18px}
+.top-actions button{border:0;background:transparent;font-size:18px;margin-left:8px;cursor:pointer}
+.hero{display:flex;justify-content:space-between;align-items:center;padding:24px;gap:16px}
+.hero h2{margin:0 0 8px 0}
+.cta button{margin-left:8px;padding:10px 16px;border-radius:8px;border:0;cursor:pointer}
+.primary{background:var(--primary);color:white}
+.ghost{background:transparent;border:1px solid #ddd}
+.shortcuts,.combos,.appointments{padding:12px 20px}
+.shortcuts,.combos,.appointments{background-color:#4CAF50;border-radius:12px;margin:20px;text-align:center}
+.services{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.service{background:var(--card);padding:12px;border-radius:10px;min-width:120px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.service i{font-size:22px}
+.combos-list{display:flex;gap:12px;}
+.combos-list{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.combo{background:var(--card);padding:10px;border-radius:8px;cursor:pointer}
+.other-shortcuts{display:flex;gap:10px;padding:12px 20px}
+.appointments-list,.appointments{padding:12px 20px}
+#appointmentsList .card{background:var(--card);padding:12px;border-radius:8px;margin-bottom:8px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:flex-end;justify-content:center}
+.modal.hidden{display:none}
+.modal-content{background:var(--card);width:100%;max-width:720px;border-radius:12px 12px 0 0;padding:16px}
+.modal .close{background:transparent;border:0;font-size:20px;position:absolute;right:12px;top:8px}
+label{display:block;margin:8px 0 4px}
+input,select,textarea{width:100%;padding:8px;border-radius:6px;border:1px solid #ddd}
+.row{display:flex;gap:8px}
+.fav-time{display:inline-block;background:#eef;border-radius:6px;padding:6px 8px;margin:4px;cursor:pointer}
+.small{font-size:13px;color:#666}
+
+@media(min-width:720px){
+  .hero{padding:36px 40px}
+  .modal{align-items:center}
+  .modal-content{border-radius:12px}
+}
+
+.auth-container{max-width:400px;margin:60px auto;padding:24px;background:var(--card);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1);text-align:center}
+.auth-container h2{margin-top:0;color:var(--accent)}
+.auth-container button{width:100%;margin-top:16px;padding:12px;font-size:16px}
+.auth-links{margin-top:20px;font-size:14px}
+.auth-links a{color:var(--primary);text-decoration:none}

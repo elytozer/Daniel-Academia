@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Barbearia - Agendamento Rápido</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+    <header class="top">
+      <h1>Academia FitExpress</h1>
+      <div class="top-actions">
+        <button id="notificationsBtn" title="Notificações"><i class="fa-regular fa-bell"></i></button>
+        <button id="profileBtn" title="Meu Perfil"><i class="fa-regular fa-user"></i></button>
+        <button id="logoutBtn" title="Sair"><i class="fa-solid fa-sign-out-alt"></i></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <h2>Treine melhor, sem complicação</h2>
+          <p>Agende aulas, avaliações e serviços rápidos. Pague por QR e avalie em segundos.</p>
+        </div>
+        <div class="cta">
+          <button id="quickBook" class="primary">Agendar Agora</button>
+          <button id="promoBtn" class="ghost">Promoções</button>
+        </div>
+      </section>
+
+      <section class="shortcuts">
+        <h3>Serviços Rápidos</h3>
+        <div class="services" id="servicesList">
+          <!-- preenchido por JS -->
+        </div>
+      </section>
+
+      <section class="combos">
+        <h3>Combos Populares</h3>
+        <div class="combos-list" id="combosList"></div>
+      </section>
+
+      <section class="other-shortcuts">
+        <button id="couponsBtn"><i class="fa-solid fa-ticket"></i> Cupons</button>
+        <button id="contactBtn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+        <button id="shareBtn"><i class="fa-solid fa-share-nodes"></i> Recomendar</button>
+      </section>
+
+      <section class="appointments">
+        <h3>Meus Agendamentos</h3>
+        <div id="appointmentsList"></div>
+      </section>
+    </main>
+
+    <!-- Modais -->
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <button class="close" id="modalClose">×</button>
+        <div id="modalBody"></div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

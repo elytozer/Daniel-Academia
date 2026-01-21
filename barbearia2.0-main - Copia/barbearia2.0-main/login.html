@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Barbearia Express</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Acesse sua conta</h2>
+        <form id="loginForm">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="seu@email.com" required>
+            
+            <label for="password">Senha</label>
+            <input type="password" id="password" placeholder="Sua senha" required>
+            
+            <button type="submit" class="primary">Entrar</button>
+            <div id="message" style="margin-top: 10px; padding: 10px; text-align: center;"></div>
+        </form>
+        <div class="auth-links">
+            <p>Ainda não tem conta? <a href="register.html">Cadastre-se</a></p>
+            <p><a href="index.html">Voltar ao início</a></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                
+                if (res.ok) {
+                    messageDiv.style.color = 'green';
+                    messageDiv.textContent = 'Login realizado! Redirecionando...';
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    localStorage.setItem('loggedIn', 'true');
+                    setTimeout(() => window.location.href = 'index.html', 1500);
+                } else {
+                    messageDiv.style.color = 'red';
+                    messageDiv.textContent = data.error || 'Erro ao fazer login';
+                }
+            } catch (err) {
+                messageDiv.style.color = 'red';
+                messageDiv.textContent = 'Erro na conexão: ' + err.message;
+            }
+        });
+    </script>
+</body>
+</html>

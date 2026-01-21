@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Barbearia Express</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Crie sua conta</h2>
+        <form id="registerForm">
+            <label for="name">Nome Completo</label>
+            <input type="text" id="name" placeholder="Seu nome" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="seu@email.com" required>
+            
+            <label for="password">Senha</label>
+            <input type="password" id="password" placeholder="Crie uma senha" required>
+            
+            <button type="submit" class="primary">Cadastrar</button>
+            <div id="message" style="margin-top: 10px; padding: 10px; text-align: center;"></div>
+        </form>
+        <div class="auth-links">
+            <p>Já possui conta? <a href="login.html">Faça login</a></p>
+            <p><a href="index.html">Voltar ao início</a></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+
+            try {
+                const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+                const data = await res.json();
+                
+                if (res.ok) {
+                    messageDiv.style.color = 'green';
+                    messageDiv.textContent = 'Cadastro realizado com sucesso! Redirecionando...';
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    setTimeout(() => window.location.href = 'login.html', 1500);
+                } else {
+                    messageDiv.style.color = 'red';
+                    messageDiv.textContent = data.error || 'Erro ao cadastrar';
+                }
+            } catch (err) {
+                messageDiv.style.color = 'red';
+                messageDiv.textContent = 'Erro na conexão: ' + err.message;
+            }
+        });
+    </script>
+</body>
+</html>

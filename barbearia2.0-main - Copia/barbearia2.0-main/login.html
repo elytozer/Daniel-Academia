@@ -30,6 +30,12 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const messageDiv = document.getElementById('message');
+            
+            if (!email.endsWith('@gmail.com')) {
+                messageDiv.style.color = 'red';
+                messageDiv.textContent = 'Email deve ser no formato @gmail.com';
+                return;
+            }
 
             try {
                 const res = await fetch('/api/login', {

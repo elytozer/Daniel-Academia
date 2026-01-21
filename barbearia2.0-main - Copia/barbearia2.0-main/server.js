@@ -13,9 +13,10 @@ app.use(express.static(path.join(__dirname)))
 
 // API - Autenticação
 app.post('/api/register', (req,res)=>{
-  const {email,password,name} = req.body
-  if(!email || !password || !name) return res.status(400).json({error:'Missing fields'})
-  const user = ds.createUser(email,password,name)
+  const {email,password,name,phone} = req.body
+  if(!email || !password || !name || !phone) return res.status(400).json({error:'Missing fields'})
+  if(!email.endsWith('@gmail.com')) return res.status(400).json({error:'Email deve ser @gmail.com'})
+  const user = ds.createUser(email,password,name,phone)
   if(!user) return res.status(409).json({error:'Email already registered'})
   return res.status(201).json({success:true,user})
 })
@@ -23,6 +24,7 @@ app.post('/api/register', (req,res)=>{
 app.post('/api/login', (req,res)=>{
   const {email,password} = req.body
   if(!email || !password) return res.status(400).json({error:'Missing fields'})
+  if(!email.endsWith('@gmail.com')) return res.status(400).json({error:'Email deve ser @gmail.com'})
   const user = ds.validateUser(email,password)
   if(!user) return res.status(401).json({error:'Invalid credentials'})
   return res.json({success:true,user})

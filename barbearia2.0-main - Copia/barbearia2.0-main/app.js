@@ -206,11 +206,12 @@ function initQuickButtons(){el('quickBook').onclick=()=>openBooking()
 function openPromos(){const wrapper=document.createElement('div');wrapper.innerHTML=`<h3>Cupons & Promoções</h3><div class="card"><strong>10% OFF para novos clientes</strong></div>`;openModal(wrapper)}
 
 function initProfile(){el('profileBtn').onclick=async ()=>{
+  const user = JSON.parse(localStorage.getItem('user')||'{}')
   const prof = await DB.getProfile()||{name:'',phone:''}
   const wrapper=document.createElement('div')
   wrapper.innerHTML = `<h3>Meu Perfil</h3>`
-  const name = document.createElement('input');name.value=prof.name;name.placeholder='Nome'
-  const phone = document.createElement('input');phone.type='tel';phone.value=prof.phone;phone.placeholder='(00)000000-0000';phone.maxLength='14';phone.oninput=()=>{let v=phone.value.replace(/[^0-9]/g,'').slice(0,12);if(v.length>0){if(v.length<=2)v='('+v;else if(v.length<=8)v='('+v.slice(0,2)+')'+v.slice(2);else v='('+v.slice(0,2)+')'+v.slice(2,7)+'-'+v.slice(7)}phone.value=v}
+  const name = document.createElement('input');name.value=user.name||prof.name;name.placeholder='Nome'
+  const phone = document.createElement('input');phone.type='tel';phone.value=user.phone||prof.phone;phone.placeholder='(00)000000-0000';phone.maxLength='14';phone.oninput=()=>{let v=phone.value.replace(/[^0-9]/g,'').slice(0,12);if(v.length>0){if(v.length<=2)v='('+v;else if(v.length<=8)v='('+v.slice(0,2)+')'+v.slice(2);else v='('+v.slice(0,2)+')'+v.slice(2,7)+'-'+v.slice(7)}phone.value=v}
   const save = document.createElement('button');save.textContent='Salvar';save.onclick=async ()=>{const clean=phone.value.replace(/[^0-9]/g,'');if(clean.length!==12)return alert('Telefone deve ter 12 dígitos');await DB.saveProfile({name:name.value,phone:phone.value});alert('Perfil salvo');closeModal()}
   wrapper.appendChild(name);wrapper.appendChild(phone);wrapper.appendChild(save)
   openModal(wrapper)
@@ -221,6 +222,22 @@ async function init(){
   await renderServices()
   await renderCombos()
   await renderAppointments()
+  
+  // Exibir nome e telefone do usuário no header
+  const user = JSON.parse(localStorage.getItem('user')||'{}')
+  if(user.name || user.phone) {
+    const userInfo = document.getElementById('userInfo')
+    if(userInfo) {
+      let infoText = ''
+      if(user.name) infoText += `${user.name}`
+      if(user.phone) infoText += `${infoText ? ' • ' : ''}${user.phone}`
+      userInfo.textContent = infoText
+      userInfo.style.fontSize = '0.9em'
+      userInfo.style.color = '#666'
+      userInfo.style.marginRight = '20px'
+    }
+  }
+  
   initNotifications()
   initContact()
   initShare()

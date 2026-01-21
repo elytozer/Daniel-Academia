@@ -17,19 +17,19 @@ function updateAppointment(id,patch){const d=read();const idx=d.appointments.fin
 
 function findUser(email){const d=read();return d.users.find(u=>u.email===email)}
 
-function createUser(email,password,name){
+function createUser(email,password,name,phone){
   const d=read()
   if(d.users.find(u=>u.email===email)) return null
-  const user={id:'u'+Date.now(),email,password,name,createdAt:new Date().toISOString()}
+  const user={id:'u'+Date.now(),email,password,name,phone,createdAt:new Date().toISOString()}
   d.users.push(user)
   write(d)
-  return {id:user.id,email:user.email,name:user.name}
+  return {id:user.id,email:user.email,name:user.name,phone:user.phone}
 }
 
 function validateUser(email,password){
   const user=findUser(email)
   if(!user || user.password!==password) return null
-  return {id:user.id,email:user.email,name:user.name}
+  return {id:user.id,email:user.email,name:user.name,phone:user.phone}
 }
 
 function deleteAppointment(id){const d=read();const idx=d.appointments.findIndex(a=>a.id===id);if(idx===-1) return null;const removed=d.appointments.splice(idx,1)[0];write(d);return removed}

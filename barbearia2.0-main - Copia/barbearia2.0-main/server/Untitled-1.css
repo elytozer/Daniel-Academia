@@ -1,0 +1,14 @@
+/* Define o fundo geral da página como verde */
+body {
+    background-color: #4CAF50; /* Verde exemplo. Ajuste o código Hex conforme sua preferência */
+}
+
+/* Garante que o fundo das classes de conteúdo permaneça branco */
+/* Adicione aqui as classes que você usa para agrupar conteúdo */
+.container, 
+.card, 
+.modal-content, 
+.box,
+section {
+    background-color: #ffffff;
+}

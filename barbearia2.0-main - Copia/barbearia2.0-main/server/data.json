@@ -1,0 +1,94 @@
+{
+  "services": [
+    {
+      "id": "musculacao",
+      "name": "Musculação",
+      "price": 40,
+      "icon": "fa-dumbbell"
+    },
+    {
+      "id": "personal",
+      "name": "Personal Trainer",
+      "price": 120,
+      "icon": "fa-user-tie"
+    },
+    {
+      "id": "yoga",
+      "name": "Aula de Yoga",
+      "price": 30,
+      "icon": "fa-person-running"
+    },
+    {
+      "id": "avaliacao",
+      "name": "Avaliação Física",
+      "price": 60,
+      "icon": "fa-heart-pulse"
+    }
+  ],
+  "combos": [
+    {
+      "id": "personal_avaliacao",
+      "name": "Personal + Avaliação",
+      "items": [
+        "personal",
+        "avaliacao"
+      ],
+      "price": 160
+    },
+    {
+      "id": "muscu_yoga",
+      "name": "Musculação + Aula de Yoga",
+      "items": [
+        "musculacao",
+        "yoga"
+      ],
+      "price": 60
+    }
+  ],
+  "appointments": [
+    {
+      "id": "a1768864682492",
+      "serviceId": "yoga",
+      "comboId": null,
+      "date": "2026-01-21T20:17",
+      "note": "GAY",
+      "status": "pago"
+    },
+    {
+      "id": "a1768864575342",
+      "serviceId": "musculacao",
+      "comboId": null,
+      "date": "2026-01-20T20:16",
+      "note": "",
+      "status": "pago"
+    }
+  ],
+  "favTimes": [],
+  "profile": {
+    "name": "veado",
+    "phone": "wrcoiwrnvo"
+  },
+  "feedbacks": [],
+  "promos": [
+    {
+      "id": "p1",
+      "title": "10% off na seg. feira"
+    }
+  ],
+  "users": [
+    {
+      "id": "u1768864537365",
+      "email": "1@a",
+      "password": "1",
+      "name": "1",
+      "createdAt": "2026-01-19T23:15:37.366Z"
+    },
+    {
+      "id": "u1768864718221",
+      "email": "thola@1",
+      "password": "thola",
+      "name": "thola",
+      "createdAt": "2026-01-19T23:18:38.221Z"
+    }
+  ]
+}

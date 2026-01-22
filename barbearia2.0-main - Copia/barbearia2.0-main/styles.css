@@ -43,3 +43,6 @@ input,select,textarea{width:100%;padding:8px;border-radius:6px;border:1px solid 
 .auth-container button{width:100%;margin-top:16px;padding:12px;font-size:16px}
 .auth-links{margin-top:20px;font-size:14px}
 .auth-links a{color:var(--primary);text-decoration:none}
+
+.footer{background:var(--card);padding:16px 20px;text-align:center;border-top:1px solid #ddd;margin-top:24px;font-size:13px;color:#666}
+.footer strong{color:var(--primary)}

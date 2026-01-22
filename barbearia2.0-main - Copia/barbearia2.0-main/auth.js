@@ -8,6 +8,17 @@ function checkAuth(){
     if(window.location.pathname.endsWith('index.html') || window.location.pathname === '/'){
       window.location.href = 'login.html'
     }
+  } else {
+    // Exibir mensagem de boas-vindas com o nome do usuário
+    displayWelcome(user)
+  }
+}
+
+// Exibir mensagem de boas-vindas
+function displayWelcome(user){
+  const userInfo = document.getElementById('userInfo')
+  if(userInfo && user.name){
+    userInfo.innerHTML = `<span class="welcome-message">Bem-vindo, <strong>${user.name}</strong>!</span>`
   }
 }
 

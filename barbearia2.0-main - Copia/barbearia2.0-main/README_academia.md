@@ -35,6 +35,3 @@ npm start
 
 Abra http://localhost:3000 para acessar o frontend; a API está em http://localhost:3000/api.
 
-Observação
-- Em produção, troque a persistência por um banco real e integre um gateway de pagamento
-  (Stripe, Mercado Pago, etc.) e um provedor de mensagens para notificações (Twilio/WhatsApp Business API).
